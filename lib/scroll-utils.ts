@@ -1,8 +1,3 @@
-/**
- * Utility function to handle smooth scrolling to sections
- * Accounts for the fixed navbar height
- */
-
 declare global {
   interface Window {
     scrollToSection: (sectionId: string) => void;
@@ -10,25 +5,43 @@ declare global {
 }
 
 export function scrollToSection(sectionId: string) {
+  if (typeof window === "undefined") return;
+
+  const cleanId = sectionId ? (sectionId.startsWith("#") ? sectionId.substring(1) : sectionId) : "";
+
+  // Small timeout allows mobile touch-event lifecycle and menu toggle to complete
+  // so browser doesn't cancel the smooth scroll animation
   setTimeout(() => {
-    const section = document.getElementById(sectionId);
+    if (!cleanId || cleanId === "home") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      try {
+        document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (_) {}
+      return;
+    }
+
+    const section = document.getElementById(cleanId);
     if (!section) return;
 
-    const navbar = document.querySelector("nav");
-    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+    // Measure only the top bar of the header (excluding mobile dropdown menu)
+    const topBar = document.querySelector("header .flex.items-center.justify-between") as HTMLElement | null;
+    const navbarHeight = topBar ? Math.min(topBar.offsetHeight + 24, 80) : 70;
 
-    const offsetPosition = section.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
-
-    console.log("Scrolling to position:", offsetPosition);
+    const currentScrollY =
+      window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    const elementTop = section.getBoundingClientRect().top;
+    const targetPosition = elementTop + currentScrollY - navbarHeight;
 
     window.scrollTo({
-      top: offsetPosition + 250,
+      top: Math.max(0, Math.round(targetPosition)),
       behavior: "smooth",
     });
-  }, 100);
+  }, 30);
 }
 
-{/* Attachs window to client side only */}
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.scrollToSection = scrollToSection;
 }
