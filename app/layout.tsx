@@ -1,6 +1,7 @@
 import type React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Poppins } from "next/font/google";
 import { signatur, pricedown } from "../lib/fonts";
 import HackBackground from "./componenets/background";
@@ -39,6 +40,10 @@ export default function RootLayout({
         <Preloader />
         <HackBackground />
         <div className="relative z-10">{children}</div>
+        <Script
+          src="https://apply.devfolio.co/v2/sdk.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
