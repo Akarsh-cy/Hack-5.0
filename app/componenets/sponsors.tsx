@@ -18,12 +18,24 @@ interface Sponsor {
 
 interface SponsorTier {
   tier: string;
+  level: "gold" | "inkind";
   sponsors: Sponsor[];
 }
 
 const sponsorTiers: SponsorTier[] = [
   {
+    tier: "Gold Sponsors",
+    level: "gold",
+    sponsors: [
+      {
+        name: "Devfolio",
+        logo: "/sponsors/devfolio.svg",
+      },
+    ],
+  },
+  {
     tier: "In-Kind Sponsors",
+    level: "inkind",
     sponsors: [
       {
         name: "XYZ",
@@ -118,7 +130,7 @@ function SponsorCard({
   large?: boolean;
 }) {
   const accents = {
-    gold: "#ff00aa",     
+    gold: "#ffd700",
     silver: "#00ffff",   
     bronze: "#a200ff",   
     inkind: ["#a200ff", "#ff00aa", "#00ffff"],
@@ -204,8 +216,6 @@ export default function SponsorsSection() {
     visible: { y: 0, opacity: 1, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },
   };
 
-  const inKind = sponsorTiers[0];
-
   return (
     <section id="sponsors" className="relative overflow-hidden py-24 md:py-32">
 
@@ -258,21 +268,32 @@ export default function SponsorsSection() {
           />
         </div>
 
-        <motion.div variants={item} className="mb-16">
-          <TierLabel index={0} accent="#ff00aa">
-            {inKind.tier}
-          </TierLabel>
-          <div className="mx-auto grid max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
-            {inKind.sponsors.map((sponsor, index) => (
-              <SponsorCard
-                key={sponsor.name}
-                sponsor={sponsor}
-                index={index}
-                tier="inkind"
-              />
-            ))}
-          </div>
-        </motion.div>
+        {sponsorTiers.map((sponsorTier, tierIndex) => (
+          <motion.div key={sponsorTier.tier} variants={item} className="mb-16">
+            <TierLabel
+              index={tierIndex}
+              accent={sponsorTier.level === "gold" ? "#ffd700" : "#ff00aa"}
+            >
+              {sponsorTier.tier}
+            </TierLabel>
+            <div
+              className={`mx-auto grid grid-cols-1 gap-8 ${
+                sponsorTier.level === "gold"
+                  ? "max-w-xl"
+                  : "max-w-3xl sm:grid-cols-2"
+              }`}
+            >
+              {sponsorTier.sponsors.map((sponsor, index) => (
+                <SponsorCard
+                  key={sponsor.name}
+                  sponsor={sponsor}
+                  index={index}
+                  tier={sponsorTier.level}
+                />
+              ))}
+            </div>
+          </motion.div>
+        ))}
 
       </motion.div>
     </section>
