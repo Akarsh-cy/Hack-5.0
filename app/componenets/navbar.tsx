@@ -252,7 +252,7 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-3 shrink-0">
             <a
-              href="https://hack-1158.devfolio.co/"
+              href="https://hack-1736.devfolio.co/"
               target="_blank"
               rel="noopener noreferrer"
               className="relative group overflow-hidden px-5 py-2 rounded-lg bg-gradient-to-r from-[#ff2a85] via-[#ff007f] to-[#7928ca] text-white font-pricedown text-xl tracking-wider uppercase border border-[#ff75c3]/60 shadow-[0_0_15px_rgba(255,42,133,0.45),_3px_3px_0px_#00f0ff] hover:shadow-[0_0_25px_rgba(255,42,133,0.85),_4px_4px_0px_#00f0ff] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[0_0_10px_rgba(255,42,133,0.4),_1px_1px_0px_#00f0ff] transition-all duration-300 flex items-center gap-2.5 whitespace-nowrap"
@@ -310,7 +310,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href, link.terminalTab, link.sectionId)}
                     className={cn(
-                      "px-3 py-1.5 font-pricedown text-xl tracking-tight uppercase transition-all duration-300 rounded relative group inline-block",
+                      "px-3 py-1.5 font-heading text-xl tracking-tight uppercase transition-all duration-300 rounded relative group inline-block",
                       isActive
                         ? "text-transparent bg-clip-text bg-gradient-to-r from-[#ff2a85] via-[#ff75c3] to-[#00f0ff] drop-shadow-[0_0_10px_rgba(255,42,133,0.8)]"
                         : "text-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#ff2a85] hover:via-[#ff75c3] hover:to-[#ff9ebb] hover:drop-shadow-[0_0_10px_rgba(255,42,133,0.9)]"
@@ -330,7 +330,7 @@ export default function Navbar() {
               })}
 
               <a
-                href="https://hack-1158.devfolio.co/"
+                href="https://hack-1736.devfolio.co/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative group overflow-hidden mt-3 py-3 rounded-lg bg-gradient-to-r from-[#ff2a85] via-[#ff007f] to-[#7928ca] text-white font-pricedown text-xl tracking-wider uppercase border border-[#ff75c3]/60 shadow-[0_0_15px_rgba(255,42,133,0.5),_3px_3px_0px_#00f0ff] flex items-center justify-center gap-2.5 transition-all duration-300"

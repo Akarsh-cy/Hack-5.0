@@ -1,11 +1,10 @@
 import type React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Inter, Poppins } from "next/font/google";
 import { signatur, pricedown } from "../lib/fonts";
 import HackBackground from "./componenets/background";
-// import Preloader from "./componenets/preloader";
+import Preloader from "./componenets/preloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,14 +36,9 @@ export default function RootLayout({
       className={`${inter.variable} ${poppins.variable} ${signatur.variable} ${pricedown.variable} scroll-smooth`}
     >
       <body className="min-h-screen text-foreground bg-[#19171b] antialiased">
-        {/* Temporarily disabled for Devfolio verification. */}
-        {/* <Preloader /> */}
+        <Preloader />
         <HackBackground />
         <div className="relative z-10">{children}</div>
-        <Script
-          src="https://apply.devfolio.co/v2/sdk.js"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
